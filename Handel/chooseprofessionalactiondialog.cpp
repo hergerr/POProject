@@ -17,8 +17,8 @@ void chooseProfessionalActionDialog::on_OkpushButton_clicked()
 {
     if(ui->addProfessionalRadioButton->isChecked()){
         hide();
-//        addProfessionalDialog = new AddProfessionalDialog(this);
-//        addProfessionalDialog->show();
+        addProfessionalDialog = new AddProfessionalDialog(this);
+        addProfessionalDialog->show();
     } else if (ui->findProfessionalRadioButton->isChecked()){
 
     } else if (ui->deleteProfessionalRadioButton->isChecked()){

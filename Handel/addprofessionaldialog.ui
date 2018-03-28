@@ -16,44 +16,44 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>30</y>
-     <width>371</width>
-     <height>251</height>
+     <x>10</x>
+     <y>10</y>
+     <width>381</width>
+     <height>281</height>
     </rect>
    </property>
    <property name="title">
     <string>Dodaj</string>
    </property>
-   <widget class="QPushButton" name="pushButtonNext">
+   <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>220</y>
+      <x>270</x>
+      <y>240</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Dalej</string>
+     <string>OK</string>
     </property>
    </widget>
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>16</x>
       <y>40</y>
       <width>331</width>
-      <height>161</height>
+      <height>171</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QLabel" name="labelVoivodeShip">
+        <widget class="QLabel" name="labelVoivoideship">
          <property name="text">
-          <string>Województwo</string>
+          <string>Wojewodztwo</string>
          </property>
         </widget>
        </item>

@@ -1,10 +1,7 @@
 #ifndef ADDPROFESSIONALDIALOG_H
 #define ADDPROFESSIONALDIALOG_H
 
-#include <QMainWindow>
-#include <QtSql>
-#include <QDebug>
-#include <QFileInfo>
+#include <QDialog>
 
 namespace Ui {
 class AddProfessionalDialog;
