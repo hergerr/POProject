@@ -2,7 +2,6 @@
 #define LOGINWINDOW_H
 
 #include <QMainWindow>
-#include <QDialog>
 #include <QtSql>
 #include <QDebug>
 #include <QFileInfo>
@@ -18,6 +17,28 @@ class LoginWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    QSqlDatabase mainDb;
+    void connClose(){
+        mainDb.close();
+        mainDb.removeDatabase(QSqlDatabase::defaultConnection);
+    }
+
+    bool connOpen(){
+        mainDb = QSqlDatabase::addDatabase("QSQLITE");
+        mainDb.setDatabaseName("C:/sqlite/poland.db");
+        mainDb.open();
+
+        if(!mainDb.open()) {
+            qDebug() << ("Cos nie dziala");
+            return false;
+        }
+        else{
+            qDebug() << ("Dziala");
+            return true;
+        }
+    }
+
+public:
     explicit LoginWindow(QWidget *parent = 0);
     ~LoginWindow();
 
@@ -26,7 +47,6 @@ private slots:
 
 private:
     Ui::LoginWindow *ui;
-    QSqlDatabase login;
     ChooseAPersonDialog *chooseAPersonDialog;
 };
 

@@ -17,6 +17,8 @@ AddProfessionalDialog::AddProfessionalDialog(QWidget *parent) :
     ui->comboBoxVoivodeship->setModel(model);
     connClose();
     qDebug() << (model->rowCount());
+    
+    
 }
 
 AddProfessionalDialog::~AddProfessionalDialog()
