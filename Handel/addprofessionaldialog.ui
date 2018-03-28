@@ -38,7 +38,7 @@
      <string>OK</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>16</x>
@@ -58,7 +58,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBoxVoivodeship"/>
+        <widget class="QComboBox" name="comboBoxVoivodeship">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -72,7 +76,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBoxCounty"/>
+        <widget class="QComboBox" name="comboBoxCounty">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -86,7 +94,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBoxCity"/>
+        <widget class="QComboBox" name="comboBoxCity">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

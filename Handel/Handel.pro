@@ -34,7 +34,8 @@ HEADERS += \
         loginwindow.h \
     chooseapersondialog.h \
     chooseprofessionalactiondialog.h \
-    addprofessionaldialog.h
+    addprofessionaldialog.h \
+    databasecontroller.h
 
 FORMS += \
         loginwindow.ui \
