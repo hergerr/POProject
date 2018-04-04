@@ -2,11 +2,13 @@
 #define CHOOSEAPERSONDIALOG_H
 
 #include <QDialog>
-#include "chooseprofessionalactiondialog.h"
+#include "professionaldialog.h"
 
 namespace Ui {
 class ChooseAPersonDialog;
 }
+
+class ProfessionalDialog;
 
 class ChooseAPersonDialog : public QDialog
 {
@@ -21,7 +23,7 @@ private slots:
 
 private:
     Ui::ChooseAPersonDialog *ui;
-    chooseProfessionalActionDialog *chooseProfessionalAction;
+    ProfessionalDialog *professionalDialog;
 };
 
 #endif // CHOOSEAPERSONDIALOG_H

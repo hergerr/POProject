@@ -19,6 +19,13 @@ public:
     ~AddProfessionalDialog();
 
 
+private slots:
+    void on_comboBoxCounty_currentIndexChanged(int index);
+
+    void on_comboBoxVoivodeship_currentIndexChanged(int index);
+
+    void on_comboBoxCounty_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::AddProfessionalDialog *ui;
 };

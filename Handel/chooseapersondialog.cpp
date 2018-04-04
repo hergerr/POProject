@@ -18,8 +18,8 @@ void ChooseAPersonDialog::on_okPushButton_clicked()
 {
     if(ui->professionalRadioButton->isChecked()){
        hide();
-       chooseProfessionalAction = new chooseProfessionalActionDialog(this);
-       chooseProfessionalAction->show();
+       professionalDialog = new ProfessionalDialog(this);
+       professionalDialog->show();
     } else {
         QMessageBox::information(this, "temporary", "Handlowiec");
     }

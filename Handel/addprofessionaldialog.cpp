@@ -21,24 +21,24 @@ AddProfessionalDialog::AddProfessionalDialog(QWidget *parent) :
 
     queryVoivodeship->prepare("select wojewodztwo from Wojewodztwa");
     queryVoivodeship->exec();
-    queryCounty->prepare("select powiat from Powiaty");
-    queryCounty->exec();
-    queryCity->prepare("select miasto from Miasta");
-    queryCity->exec();
+//    queryCounty->prepare("select powiat from Powiaty");
+//    queryCounty->exec();
+//    queryCity->prepare("select miasto from Miasta");
+//    queryCity->exec();
 
     modelVoivodeship->setQuery(*queryVoivodeship);
-    modelCounty->setQuery(*queryCounty);
-    modelCity->setQuery(*queryCity);
+//    modelCounty->setQuery(*queryCounty);
+//    modelCity->setQuery(*queryCity);
 
     ui->comboBoxVoivodeship->setModel(modelVoivodeship);
-    ui->comboBoxCounty->setModel(modelCounty);
-    ui->comboBoxCity->setModel(modelCity);
+//    ui->comboBoxCounty->setModel(modelCounty);
+//    ui->comboBoxCity->setModel(modelCity);
     connClose();
 
 
     qDebug() << (modelVoivodeship->rowCount());
-    qDebug() << (modelCounty->rowCount());
-    qDebug() << (modelCity->rowCount());
+//    qDebug() << (modelCounty->rowCount());
+//    qDebug() << (modelCity->rowCount());
 }
 
 AddProfessionalDialog::~AddProfessionalDialog()
@@ -46,3 +46,18 @@ AddProfessionalDialog::~AddProfessionalDialog()
     delete ui;
 }
 
+
+void AddProfessionalDialog::on_comboBoxCounty_currentIndexChanged(int index)
+{
+
+}
+
+void AddProfessionalDialog::on_comboBoxVoivodeship_currentIndexChanged(int index)
+{
+
+}
+
+void AddProfessionalDialog::on_comboBoxCounty_currentIndexChanged(const QString &arg1)
+{
+
+}

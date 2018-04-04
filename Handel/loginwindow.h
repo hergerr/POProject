@@ -12,11 +12,14 @@ namespace Ui {
 class LoginWindow;
 }
 
+class ChooseAPersonDialog;
+
 class LoginWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
+
     QSqlDatabase mainDb;
     void connClose(){
         mainDb.close();

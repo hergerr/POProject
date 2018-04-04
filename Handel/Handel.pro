@@ -27,18 +27,14 @@ SOURCES += \
         main.cpp \
         loginwindow.cpp \
     chooseapersondialog.cpp \
-    chooseprofessionalactiondialog.cpp \
-    addprofessionaldialog.cpp
+    professionaldialog.cpp
 
 HEADERS += \
         loginwindow.h \
     chooseapersondialog.h \
-    chooseprofessionalactiondialog.h \
-    addprofessionaldialog.h \
-    databasecontroller.h
+    professionaldialog.h
 
 FORMS += \
         loginwindow.ui \
     chooseapersondialog.ui \
-    chooseprofessionalactiondialog.ui \
-    addprofessionaldialog.ui
+    professionaldialog.ui
