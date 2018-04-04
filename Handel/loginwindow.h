@@ -23,6 +23,7 @@ public:
     QSqlDatabase mainDb;
     void connClose(){
         mainDb.close();
+        mainDb = QSqlDatabase();
         mainDb.removeDatabase(QSqlDatabase::defaultConnection);
     }
 

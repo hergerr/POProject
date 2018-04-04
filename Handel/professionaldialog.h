@@ -24,6 +24,26 @@ public:
 private slots:
     void on_addPushButton_clicked();
 
+    void on_modifyPushButton_clicked();
+
+    void on_deletePushButton_clicked();
+
+    void on_findPushButton_2_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_showAllPushButton_clicked();
+
+    void on_showEverethingPushButton_clicked();
+
+    void on_findPushButton_clicked();
+
+    void on_voivodeshipComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_voivodeshipComboBox_currentIndexChanged(int index);
+
+    void on_cityComboBox_currentIndexChanged(int index);
+
 private:
     Ui::ProfessionalDialog *ui;
 };
