@@ -34,10 +34,13 @@ void ProfessionalDialog::on_addPushButton_clicked()
     QString companyType = ui->companyTypeLineEdit->text();
     QString phoneNumber = ui->phoneLineEdit->text();
     QString email = ui->emailLineEdit->text();
+    QString voivodeship = ui->voivodeshipComboBox->currentText();
+    QString county = ui->countyComboBox->currentText();
+    QString city = ui->cityComboBox->currentText();
 
     connection.connOpen();
     QSqlQuery query;
-    query.prepare("insert into Professionals  (name, company_name, company_type, phone_number, email) values ('"+name+"','"+companyName+"','"+companyType+"','"+phoneNumber+"','"+email+"')");
+    query.prepare("insert into Professionals  (name, company_name, company_type, phone_number, email, voivodeship, county, city) values ('"+name+"','"+companyName+"','"+companyType+"','"+phoneNumber+"','"+email+"','"+voivodeship+"','"+county+"','"+city+"')");
 
    if(query.exec()){
         QMessageBox::information(this, "Komunikat", "Zapisano");
@@ -52,15 +55,20 @@ void ProfessionalDialog::on_modifyPushButton_clicked()
 {
     LoginWindow connection;
 
+
+    QString id = ui->lineEdit->text();
     QString name = ui->nameLineEdit->text();
     QString companyName = ui->companyNameLineEdit->text();
     QString companyType = ui->companyTypeLineEdit->text();
     QString phoneNumber = ui->phoneLineEdit->text();
     QString email = ui->emailLineEdit->text();
+    QString voivodeship = ui->voivodeshipComboBox->currentText();
+    QString county = ui->countyComboBox->currentText();
+    QString city = ui->cityComboBox->currentText();
 
     connection.connOpen();
     QSqlQuery query;
-    query.prepare("update Professionals set name = '"+name+"',company_name = '"+companyName+"', company_type = '"+companyType+"', phone_number = '"+phoneNumber+"', email = '"+email+"' where phone_number = '"+phoneNumber+"'");
+    query.prepare("update Professionals set name = '"+name+"',company_name = '"+companyName+"', company_type = '"+companyType+"', phone_number = '"+phoneNumber+"', email = '"+email+"', voivodeship = '"+voivodeship+"', county = '"+county+"',city = '"+city+"' where id = '"+id+"'");
 
    if(query.exec()){
         QMessageBox::information(this, "Komunikat", "Zmieniono");
@@ -73,16 +81,11 @@ void ProfessionalDialog::on_modifyPushButton_clicked()
 void ProfessionalDialog::on_deletePushButton_clicked()
 {
     LoginWindow connection;
-
-    QString name = ui->nameLineEdit->text();
-    QString companyName = ui->companyNameLineEdit->text();
-    QString companyType = ui->companyTypeLineEdit->text();
-    QString phoneNumber = ui->phoneLineEdit->text();
-    QString email = ui->emailLineEdit->text();
+    QString id = ui->lineEdit->text();
 
     connection.connOpen();
     QSqlQuery query;
-    query.prepare("delete from Professionals where phone_number = '"+phoneNumber+"'");
+    query.prepare("delete from Professionals where id = '"+id+"'");
 
    if(query.exec()){
         QMessageBox::information(this, "Komunikat", "Usunięto");
@@ -152,3 +155,34 @@ void ProfessionalDialog::on_countyComboBox_currentIndexChanged(int index)
     connection.connClose();
     qDebug() << (modelCity->rowCount());
 }
+
+void ProfessionalDialog::on_infoTableView_activated(const QModelIndex &index)
+{
+    LoginWindow connection;
+    QString val = ui->infoTableView->model()->data(index).toString();
+    connection.connOpen();
+    QSqlQuery query;
+    query.prepare("select * from Professionals where id = '"+val+"' or name = '"+val+"' or company_name = '"+val+"' or company_type = '"+val+"' or phone_number = '"+val+"' or email = '"+val+"'or voivodeship = '"+val+"' or county = '"+val+"' or city = '"+val+"'");
+
+    if(query.exec()){
+        while(query.next()){
+            ui->lineEdit->setText(query.value(0).toString());
+            ui->nameLineEdit->setText(query.value(1).toString());
+            ui->companyNameLineEdit->setText(query.value(2).toString());
+            ui->companyTypeLineEdit->setText(query.value(3).toString());
+            ui->phoneLineEdit->setText(query.value(4).toString());
+            ui->emailLineEdit->setText(query.value(5).toString());
+            ui->voivodeshipComboBox->setCurrentText(query.value(6).toString());
+            ui->countyComboBox->setCurrentText(query.value(7).toString());
+            ui->cityComboBox->setCurrentText(query.value(8).toString());
+        }
+        connection.connClose();
+    } else {
+        QMessageBox::critical(this,"ERROR", query.lastError().text());
+    }
+}
+
+//void ProfessionalDialog::on_infoTableView_clicked(const QModelIndex &index)
+//{
+
+//}
