@@ -44,6 +44,10 @@ private slots:
 
     void on_cityComboBox_currentIndexChanged(int index);
 
+    void on_countyComboBox_currentIndexChanged(int index);
+
+    void on_countyComboBox_currentTextChanged(const QString &arg1);
+
 private:
     Ui::ProfessionalDialog *ui;
 };

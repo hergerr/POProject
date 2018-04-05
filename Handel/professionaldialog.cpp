@@ -119,7 +119,6 @@ void ProfessionalDialog::on_voivodeshipComboBox_currentIndexChanged(int index)
     QSqlQueryModel * modelCounty = new QSqlQueryModel();
     connection.connOpen();
     QSqlQuery * queryCounty = new QSqlQuery(connection.mainDb);
-    qDebug() << voivodeshipId;
     queryCounty->prepare("select powiat from Powiaty where wojewodztwoId = :voivodeshipId");
     queryCounty->bindValue(":voivodeshipId", voivodeshipId);
     queryCounty->exec();
@@ -131,3 +130,25 @@ void ProfessionalDialog::on_voivodeshipComboBox_currentIndexChanged(int index)
 
 }
 
+
+void ProfessionalDialog::on_countyComboBox_currentIndexChanged(int index)
+{
+    LoginWindow connection;
+    int voivodeshipId = ui->voivodeshipComboBox->currentIndex();
+    int countyId = ui->countyComboBox->currentIndex();
+    voivodeshipId += 1;
+    voivodeshipId *= 2;
+    countyId += 1;
+    QSqlQueryModel * modelCity = new QSqlQueryModel();
+    connection.connOpen();
+    QSqlQuery * queryCity = new QSqlQuery(connection.mainDb);
+    queryCity->prepare("select miasto from Miasta where wojewodztwoId = :voivodeshipId and powiatId = :countyId");
+    queryCity->bindValue(":voivodeshipId", voivodeshipId);
+    queryCity->bindValue(":countyId", countyId);
+    queryCity->exec();
+    modelCity->setQuery(*queryCity);
+    ui->cityComboBox->setModel(modelCity);
+    ui->cityComboBox->setCurrentIndex(-1);
+    connection.connClose();
+    qDebug() << (modelCity->rowCount());
+}
