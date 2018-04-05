@@ -48,6 +48,10 @@ private slots:
 
     void on_countyComboBox_currentTextChanged(const QString &arg1);
 
+    void on_infoTableView_activated(const QModelIndex &index);
+
+    void on_infoTableView_clicked(const QModelIndex &index);
+
 private:
     Ui::ProfessionalDialog *ui;
 };
