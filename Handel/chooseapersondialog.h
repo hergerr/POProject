@@ -10,6 +10,7 @@ class ChooseAPersonDialog;
 }
 
 class ProfessionalDialog;
+class TraderDialog;
 
 class ChooseAPersonDialog : public QDialog
 {

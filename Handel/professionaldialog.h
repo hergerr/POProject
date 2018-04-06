@@ -28,29 +28,13 @@ private slots:
 
     void on_deletePushButton_clicked();
 
-    void on_findPushButton_2_clicked();
-
-    void on_pushButton_clicked();
-
-    void on_showAllPushButton_clicked();
-
-    void on_showEverethingPushButton_clicked();
-
     void on_findPushButton_clicked();
-
-    void on_voivodeshipComboBox_currentIndexChanged(const QString &arg1);
 
     void on_voivodeshipComboBox_currentIndexChanged(int index);
 
-    void on_cityComboBox_currentIndexChanged(int index);
-
     void on_countyComboBox_currentIndexChanged(int index);
 
-    void on_countyComboBox_currentTextChanged(const QString &arg1);
-
     void on_infoTableView_activated(const QModelIndex &index);
-
-    void on_infoTableView_clicked(const QModelIndex &index);
 
 private:
     Ui::ProfessionalDialog *ui;

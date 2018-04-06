@@ -55,7 +55,6 @@ void ProfessionalDialog::on_modifyPushButton_clicked()
 {
     LoginWindow connection;
 
-
     QString id = ui->lineEdit->text();
     QString name = ui->nameLineEdit->text();
     QString companyName = ui->companyNameLineEdit->text();
