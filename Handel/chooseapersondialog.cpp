@@ -21,6 +21,8 @@ void ChooseAPersonDialog::on_okPushButton_clicked()
        professionalDialog = new ProfessionalDialog(this);
        professionalDialog->show();
     } else {
-        QMessageBox::information(this, "temporary", "Handlowiec");
+        hide();
+        traderDialog = new TraderDialog(this);
+        traderDialog->show();
     }
 }

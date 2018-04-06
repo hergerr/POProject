@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "professionaldialog.h"
+#include "traderdialog.h"
 
 namespace Ui {
 class ChooseAPersonDialog;
@@ -24,6 +25,7 @@ private slots:
 private:
     Ui::ChooseAPersonDialog *ui;
     ProfessionalDialog *professionalDialog;
+    TraderDialog *traderDialog;
 };
 
 #endif // CHOOSEAPERSONDIALOG_H

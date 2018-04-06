@@ -100,10 +100,22 @@ void ProfessionalDialog::on_findPushButton_clicked()
 {
     LoginWindow connection;
     QSqlQueryModel * model = new QSqlQueryModel();
-
     connection.connOpen();
     QSqlQuery * query = new QSqlQuery(connection.mainDb);
-    query->prepare("select * from Professionals");
+
+
+    if(ui->voivodeshipComboBox->currentIndex() == -1){
+        query->prepare("select * from Professionals");
+    } else if (ui->voivodeshipComboBox->currentIndex() != -1 && ui->countyComboBox->currentIndex() == -1){
+        QString voivodeship = ui->voivodeshipComboBox->currentText();
+        query->prepare("select * from Professionals where voivodeship = '"+voivodeship+"' ");
+    } else{
+        QString voivodeship = ui->voivodeshipComboBox->currentText();
+        QString county = ui->countyComboBox->currentText();
+        query->prepare("select * from Professionals where voivodeship = '"+voivodeship+"' and county = '"+county+"'");
+    }
+
+
     query->exec();
     model->setQuery(*query);
     ui->infoTableView->setModel(model);
@@ -181,8 +193,3 @@ void ProfessionalDialog::on_infoTableView_activated(const QModelIndex &index)
         QMessageBox::critical(this,"ERROR", query.lastError().text());
     }
 }
-
-//void ProfessionalDialog::on_infoTableView_clicked(const QModelIndex &index)
-//{
-
-//}
