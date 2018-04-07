@@ -29,7 +29,7 @@ public:
 
     bool connOpen(){
         mainDb = QSqlDatabase::addDatabase("QSQLITE");
-        mainDb.setDatabaseName("C:/sqlite/poland.db");
+        mainDb.setDatabaseName("../main.db");
         mainDb.open();
 
         if(!mainDb.open()) {

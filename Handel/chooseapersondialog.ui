@@ -10,6 +10,18 @@
     <height>300</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>300</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>400</width>
+    <height>300</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
@@ -22,41 +34,85 @@
      <height>231</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Verdana</family>
+    </font>
+   </property>
    <property name="title">
     <string>Wybierz fachowca lub handlowca</string>
    </property>
+   <widget class="QPushButton" name="okPushButton">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>140</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Verdana</family>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	border-radius: 5px;
+	background-color: rgb(212, 212, 212);
+}
+
+
+QPushButton:pressed {
+	
+	background-color: rgb(167, 167, 167);
+}</string>
+    </property>
+    <property name="text">
+     <string>OK</string>
+    </property>
+   </widget>
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>40</y>
-      <width>311</width>
-      <height>161</height>
+      <x>31</x>
+      <y>41</y>
+      <width>261</width>
+      <height>61</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QRadioButton" name="professionalRadioButton">
-         <property name="text">
-          <string>fachowiec</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QRadioButton" name="traderRadioButton">
-         <property name="text">
-          <string>handlowiec</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QRadioButton" name="professionalRadioButton">
+       <property name="styleSheet">
+        <string notr="true">QRadioButton::indicator {
+border: 1px solid gray;
+border-radious: 5px;
+}
+
+QRadioButton::indicator::checked {
+background-color: rgb(212, 212, 212);
+}</string>
+       </property>
+       <property name="text">
+        <string>fachowiec</string>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="okPushButton">
+      <widget class="QRadioButton" name="traderRadioButton">
+       <property name="styleSheet">
+        <string notr="true">QRadioButton::indicator {
+border: 1px solid gray;
+border-radious: 5px;
+}
+
+QRadioButton::indicator::checked {
+background-color: rgb(212, 212, 212);
+}</string>
+       </property>
        <property name="text">
-        <string>OK</string>
+        <string>handlowiec</string>
        </property>
       </widget>
      </item>

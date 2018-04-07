@@ -41,3 +41,5 @@ FORMS += \
     chooseapersondialog.ui \
     professionaldialog.ui \
     traderdialog.ui
+
+RESOURCES +=

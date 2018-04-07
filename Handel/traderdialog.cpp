@@ -102,7 +102,7 @@ void TraderDialog::on_deletePushButton_clicked()
         QMessageBox::information(this, "Komunikat", "Usunięto");
         connection.connClose();
     } else {
-        QMessageBox::information(this, "ERROR", "Nie usunięto");
+        QMessageBox::critical(this, "ERROR", "Nie usunięto");
     }
 }
 
@@ -181,4 +181,16 @@ void TraderDialog::on_infoTableView_activated(const QModelIndex &index)
     } else {
         QMessageBox::critical(this,"ERROR", query.lastError().text());
     }
+}
+
+void TraderDialog::on_cleanPushButton_clicked()
+{
+    ui->lineEdit->setText("");
+    ui->nameLineEdit->setText("");
+    ui->workHoursLineEdit->setText("");
+    ui->phoneLineEdit->setText("");
+    ui->emailLineEdit->setText("");
+    ui->voivodeshipComboBox->setCurrentIndex(-1);
+    ui->countyComboBox->setCurrentIndex(-1);
+    ui->cityComboBox->setCurrentIndex(-1);
 }

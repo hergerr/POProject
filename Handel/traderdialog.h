@@ -35,6 +35,8 @@ private slots:
 
     void on_infoTableView_activated(const QModelIndex &index);
 
+    void on_cleanPushButton_clicked();
+
 private:
     Ui::TraderDialog *ui;
 };
