@@ -15,6 +15,7 @@ LoginWindow::~LoginWindow()
     delete ui;
 }
 
+//definicja obslugi zdarzenia
 void LoginWindow::on_LoginPushButton_clicked()
 {
     QString username = ui->loginLineEdit->text();

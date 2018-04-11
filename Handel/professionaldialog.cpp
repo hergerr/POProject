@@ -7,6 +7,9 @@ ProfessionalDialog::ProfessionalDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //na poczatku trzeba zaladowac do comboBoxa z wojewodztwami
+    //wszystkie wojedzwtwa
+
     LoginWindow connection;
     QSqlQueryModel * modelVoivodeship = new QSqlQueryModel();
     connection.connOpen();
@@ -27,8 +30,10 @@ ProfessionalDialog::~ProfessionalDialog()
 
 void ProfessionalDialog::on_addPushButton_clicked()
 {
-    LoginWindow connection;
+    //dodawanie nowego rekordu z uwzglednieniem poprawnosci nr telefonu
+    //przewidziane formy to xxx xxx xxx lub xxxxxxxxx
 
+    LoginWindow connection;
     QString name = ui->nameLineEdit->text();
     QString companyName = ui->companyNameLineEdit->text();
     QString companyType = ui->companyTypeLineEdit->text();
@@ -38,23 +43,30 @@ void ProfessionalDialog::on_addPushButton_clicked()
     QString county = ui->countyComboBox->currentText();
     QString city = ui->cityComboBox->currentText();
 
-    connection.connOpen();
-    QSqlQuery query;
-    query.prepare("insert into Professionals  (name, company_name, company_type, phone_number, email, voivodeship, county, city) values ('"+name+"','"+companyName+"','"+companyType+"','"+phoneNumber+"','"+email+"','"+voivodeship+"','"+county+"','"+city+"')");
+    if(phoneNumber.length() == 9 || phoneNumber.length() == 11){
+        connection.connOpen();
+        QSqlQuery query;
+        query.prepare("insert into Professionals  (name, company_name, company_type, phone_number, email, voivodeship, county, city)"
+                  " values ('"+name+"','"+companyName+"','"+companyType+"','"+phoneNumber+"','"+email+"','"+voivodeship+"','"+county+"','"+city+"')");
 
-   if(query.exec()){
-        QMessageBox::information(this, "Komunikat", "Zapisano");
-        connection.connClose();
-    } else {
-        QMessageBox::information(this, "ERROR", "Nie zapisano");
+    if(query.exec()){
+         QMessageBox::information(this, "Komunikat", "Zapisano");
+         connection.connClose();
+     } else {
+         QMessageBox::information(this, "ERROR", "Nie zapisano");
+     }
+
     }
+    else QMessageBox::information(this, "Komunikat", "Niepoprawny numer telefonu");
+
+
 
 }
 
 void ProfessionalDialog::on_modifyPushButton_clicked()
 {
+    //modyfikowanie rekordu na podstawie id z uwzglednieniem nr. telefonu
     LoginWindow connection;
-
     QString id = ui->lineEdit->text();
     QString name = ui->nameLineEdit->text();
     QString companyName = ui->companyNameLineEdit->text();
@@ -65,9 +77,12 @@ void ProfessionalDialog::on_modifyPushButton_clicked()
     QString county = ui->countyComboBox->currentText();
     QString city = ui->cityComboBox->currentText();
 
+    if(phoneNumber.length() == 9 || phoneNumber.length() == 11){
     connection.connOpen();
     QSqlQuery query;
-    query.prepare("update Professionals set name = '"+name+"',company_name = '"+companyName+"', company_type = '"+companyType+"', phone_number = '"+phoneNumber+"', email = '"+email+"', voivodeship = '"+voivodeship+"', county = '"+county+"',city = '"+city+"' where id = '"+id+"'");
+    query.prepare("update Professionals set name = '"+name+"',company_name = '"+companyName+"',"
+                  " company_type = '"+companyType+"', phone_number = '"+phoneNumber+"',"
+                  " email = '"+email+"', voivodeship = '"+voivodeship+"', county = '"+county+"',city = '"+city+"' where id = '"+id+"'");
 
    if(query.exec()){
         QMessageBox::information(this, "Komunikat", "Zmieniono");
@@ -75,10 +90,15 @@ void ProfessionalDialog::on_modifyPushButton_clicked()
     } else {
         QMessageBox::information(this, "ERROR", "Nie zmieniono");
     }
+
+    }
+    else QMessageBox::information(this, "Komunikat", "Niepoprawny numer telefonu");
 }
 
 void ProfessionalDialog::on_deletePushButton_clicked()
 {
+    //usuwanie rekordu na podstawie id
+
     LoginWindow connection;
     QString id = ui->lineEdit->text();
 
@@ -97,6 +117,9 @@ void ProfessionalDialog::on_deletePushButton_clicked()
 
 void ProfessionalDialog::on_findPushButton_clicked()
 {
+    //Pokazanie wszystkich rekordow, a takze wyszukiwanie na podstawie
+    //tekstu w comboBoxach
+
     LoginWindow connection;
     QSqlQueryModel * model = new QSqlQueryModel();
     connection.connOpen();
@@ -120,16 +143,21 @@ void ProfessionalDialog::on_findPushButton_clicked()
     ui->infoTableView->setModel(model);
     connection.connClose();
     qDebug() << (model->rowCount());
+    if(model->rowCount() == 0) QMessageBox::information(this, "Komumikat", "Brak pasujacych rekordów");
 }
 
 
 
 void ProfessionalDialog::on_voivodeshipComboBox_currentIndexChanged(int index)
 {
+    //wyszukiwaanie powiatow na podstawie wybranego wojewodztwa
     LoginWindow connection;
     int voivodeshipId = ui->voivodeshipComboBox->currentIndex();
+
+    //nalezy zmodyfikowac otrzymany indeks, tak aby zgadzal sie z indexem w bazie danych
     voivodeshipId += 1;
     voivodeshipId *= 2;
+
     QSqlQueryModel * modelCounty = new QSqlQueryModel();
     connection.connOpen();
     QSqlQuery * queryCounty = new QSqlQuery(connection.mainDb);
@@ -147,6 +175,8 @@ void ProfessionalDialog::on_voivodeshipComboBox_currentIndexChanged(int index)
 
 void ProfessionalDialog::on_countyComboBox_currentIndexChanged(int index)
 {
+    //analogicznie do powyzszej metody, wybieranie miasta na podstawie wojewodztwa
+    // i powiatu do ktorego nalezy
     LoginWindow connection;
     int voivodeshipId = ui->voivodeshipComboBox->currentIndex();
     int countyId = ui->countyComboBox->currentIndex();
@@ -169,12 +199,19 @@ void ProfessionalDialog::on_countyComboBox_currentIndexChanged(int index)
 
 void ProfessionalDialog::on_infoTableView_activated(const QModelIndex &index)
 {
+    //gdy klikniemy na jakies pole rekordu to dane zaprezentuja sie
+    //w textboxach, bardziej w formie wizytowkowej
+
+    //w ten sposob mozna wygodnie edytowac rekordy
     LoginWindow connection;
     QString val = ui->infoTableView->model()->data(index).toString();
     connection.connOpen();
     QSqlQuery query;
-    query.prepare("select * from Professionals where id = '"+val+"' or name = '"+val+"' or company_name = '"+val+"' or company_type = '"+val+"' or phone_number = '"+val+"' or email = '"+val+"'or voivodeship = '"+val+"' or county = '"+val+"' or city = '"+val+"'");
+    query.prepare("select * from Professionals where id = '"+val+"' or name = '"+val+"'"
+                  " or company_name = '"+val+"' or company_type = '"+val+"' or phone_number = '"+val+"'"
+                  " or email = '"+val+"'or voivodeship = '"+val+"' or county = '"+val+"' or city = '"+val+"'");
 
+    //ustalanie zawartosci textboxow na podstawie pozycji w tabeli w bazie danych
     if(query.exec()){
         while(query.next()){
             ui->lineEdit->setText(query.value(0).toString());
@@ -195,6 +232,8 @@ void ProfessionalDialog::on_infoTableView_activated(const QModelIndex &index)
 
 void ProfessionalDialog::on_cleanPushButton_clicked()
 {
+    //wyczeszczenie textboxow
+
     ui->lineEdit->setText("");
     ui->nameLineEdit->setText("");
     ui->companyNameLineEdit->setText("");

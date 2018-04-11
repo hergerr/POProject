@@ -12,6 +12,7 @@ namespace Ui {
 class ProfessionalDialog;
 }
 
+//Dziedziczenie po QDialog
 class ProfessionalDialog : public QDialog
 {
     Q_OBJECT
@@ -22,6 +23,8 @@ public:
     ~ProfessionalDialog();
 
 private slots:
+    //obsluga zdarzen polegajacych na kliknieciu guzika
+
     void on_addPushButton_clicked();
 
     void on_modifyPushButton_clicked();

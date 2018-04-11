@@ -1,6 +1,8 @@
 #include "traderdialog.h"
 #include "ui_traderdialog.h"
 
+//komentarze analogiczne do professionaldialog.cpp
+//zmiany sa dosc kosmetyczne
 TraderDialog::TraderDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::TraderDialog)
@@ -67,8 +69,6 @@ void TraderDialog::on_countyComboBox_currentIndexChanged(int index)
 
 void TraderDialog::on_addPushButton_clicked()
 {
-    LoginWindow connection;
-
     QString name = ui->nameLineEdit->text();
     QString workHours = ui->workHoursLineEdit->text();
     QString phoneNumber = ui->phoneLineEdit->text();
@@ -77,9 +77,14 @@ void TraderDialog::on_addPushButton_clicked()
     QString county = ui->countyComboBox->currentText();
     QString city = ui->cityComboBox->currentText();
 
+    if(phoneNumber.length() == 9 || phoneNumber.length() == 11){
+
+    LoginWindow connection;
     connection.connOpen();
     QSqlQuery query;
-    query.prepare("insert into Traders  (name, work_hours, phone_number, email, voivodeship, county, city) values ('"+name+"','"+workHours+"','"+phoneNumber+"','"+email+"','"+voivodeship+"','"+county+"','"+city+"')");
+    query.prepare("insert into Traders  (name, work_hours, phone_number, email,"
+                  " voivodeship, county, city) values ('"+name+"','"+workHours+"','"+phoneNumber+"',"
+                  "'"+email+"','"+voivodeship+"','"+county+"','"+city+"')");
 
    if(query.exec()){
         QMessageBox::information(this, "Komunikat", "Zapisano");
@@ -87,6 +92,7 @@ void TraderDialog::on_addPushButton_clicked()
     } else {
         QMessageBox::information(this, "ERROR", "Nie zapisano");
     }
+    } else QMessageBox::information(this, "Komunikat", "Niepoprawny numer telefonu");
 }
 
 void TraderDialog::on_deletePushButton_clicked()
@@ -108,8 +114,6 @@ void TraderDialog::on_deletePushButton_clicked()
 
 void TraderDialog::on_modifyPushButton_clicked()
 {
-    LoginWindow connection;
-
     QString id = ui->lineEdit->text();
     QString name = ui->nameLineEdit->text();
     QString workHours = ui->workHoursLineEdit->text();
@@ -119,9 +123,13 @@ void TraderDialog::on_modifyPushButton_clicked()
     QString county = ui->countyComboBox->currentText();
     QString city = ui->cityComboBox->currentText();
 
+    if(phoneNumber.length() == 9 || phoneNumber.length() == 11){
+    LoginWindow connection;
     connection.connOpen();
     QSqlQuery query;
-    query.prepare("update Traders set name = '"+name+"', work_hours = '"+workHours+"', phone_number = '"+phoneNumber+"', email = '"+email+"', voivodeship = '"+voivodeship+"', county = '"+county+"',city = '"+city+"' where id = '"+id+"'");
+    query.prepare("update Traders set name = '"+name+"', work_hours = '"+workHours+"',"
+                  " phone_number = '"+phoneNumber+"', email = '"+email+"', voivodeship = '"+voivodeship+"',"
+                  " county = '"+county+"',city = '"+city+"' where id = '"+id+"'");
 
    if(query.exec()){
         QMessageBox::information(this, "Komunikat", "Zmieniono");
@@ -129,6 +137,7 @@ void TraderDialog::on_modifyPushButton_clicked()
     } else {
         QMessageBox::information(this, "ERROR", "Nie zmieniono");
     }
+    } else QMessageBox::information(this, "Komunikat", "Niepoprawny numer telefonu");
 }
 
 void TraderDialog::on_findPushButton_clicked()
@@ -156,6 +165,8 @@ void TraderDialog::on_findPushButton_clicked()
     ui->infoTableView->setModel(model);
     connection.connClose();
     qDebug() << (model->rowCount());
+
+    if(model->rowCount() == 0) QMessageBox::information(this, "Komumikat", "Brak pasujacych rekordów");
 }
 
 void TraderDialog::on_infoTableView_activated(const QModelIndex &index)
@@ -164,7 +175,9 @@ void TraderDialog::on_infoTableView_activated(const QModelIndex &index)
     QString val = ui->infoTableView->model()->data(index).toString();
     connection.connOpen();
     QSqlQuery query;
-    query.prepare("select * from Traders where id = '"+val+"' or name = '"+val+"' or work_hours = '"+val+"' or phone_number = '"+val+"' or email = '"+val+"'or voivodeship = '"+val+"' or county = '"+val+"' or city = '"+val+"'");
+    query.prepare("select * from Traders where id = '"+val+"' or name = '"+val+"'"
+                  " or work_hours = '"+val+"' or phone_number = '"+val+"'"
+                  " or email = '"+val+"'or voivodeship = '"+val+"' or county = '"+val+"' or city = '"+val+"'");
 
     if(query.exec()){
         while(query.next()){

@@ -14,12 +14,15 @@ class LoginWindow;
 
 class ChooseAPersonDialog;
 
+
+//dziedziczenie po QMainWindow
 class LoginWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
 
+    // metodY odpowiedzialne za otwieranie i zamykanie polaczenia z baza danych
     QSqlDatabase mainDb;
     void connClose(){
         mainDb.close();
@@ -47,10 +50,13 @@ public:
     ~LoginWindow();
 
 private slots:
+    //deklaracja metody obslugujacej zdarzenie klikniecia guzika
     void on_LoginPushButton_clicked();
 
 private:
     Ui::LoginWindow *ui;
+
+    //Tutaj tworze wskaznik z pomoca ktorego w pliku .cpp bede mogl otworzyc nowe okno zamiast istniejacego
     ChooseAPersonDialog *chooseAPersonDialog;
 };
 

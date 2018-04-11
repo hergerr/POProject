@@ -12,6 +12,7 @@ namespace Ui {
 class TraderDialog;
 }
 
+//dziedziczenie po QDialog
 class TraderDialog : public QDialog
 {
     Q_OBJECT
@@ -21,6 +22,8 @@ public:
     ~TraderDialog();
 
 private slots:
+    //deklaracje metod obslugujacych zdarzenie klikniecia guzikow
+
     void on_voivodeshipComboBox_currentIndexChanged(int index);
 
     void on_countyComboBox_currentIndexChanged(int index);
